@@ -1,12 +1,14 @@
 import React from 'react';
 import {SafeAreaView, Text, StyleSheet} from 'react-native';
+import SortModal from './SortModal';
+import FilterModal from './FilterModal';
 
 export default function Header() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>Button</Text>
+      <SortModal />
       <Text style={styles.title}>Famobi </Text>
-      <Text style={styles.text}>Button</Text>
+      <FilterModal />
     </SafeAreaView>
   );
 }
@@ -19,7 +21,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: 'rgb(20,20,37)',
     borderBottomWidth: 1,
-    borderColor: 'rgb(225,244,120)',
+    borderColor: 'aqua',
   },
   title: {
     color: 'white',

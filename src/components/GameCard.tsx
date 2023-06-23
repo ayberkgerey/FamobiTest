@@ -1,12 +1,12 @@
 import React from 'react';
-import {SafeAreaView, Text, StyleSheet, View, Image} from 'react-native';
+import {TouchableOpacity, Text, StyleSheet, View, Image} from 'react-native';
 
 export default function GameCard(props) {
   if (!props.title || !props.thumbnail) {
     return null;
   }
   return (
-    <SafeAreaView style={styles.container}>
+    <TouchableOpacity style={styles.container}>
       <Image source={{uri: props.thumbnail}} style={styles.imageBox} />
       <View style={{marginLeft: 12, alignSelf: 'center'}}>
         <Text style={styles.title}>{props.title}</Text>
@@ -15,7 +15,7 @@ export default function GameCard(props) {
           <Text style={styles.genreText}>{props.genre}</Text>
         </View>
       </View>
-    </SafeAreaView>
+    </TouchableOpacity>
   );
 }
 
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 5,
     alignSelf: 'flex-start',
+    marginTop: 5,
   },
   genreText: {
     fontWeight: '500',

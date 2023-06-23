@@ -31,8 +31,6 @@ export default function MainContainer() {
             publisher={item.publisher}
             genre={item.genre}
             bounces={false}
-            ListHeaderComponent={<View style={{height: 0}} />}
-            ListFooterComponent={<View style={{height: 0}} />}
           />
         )}
       />
