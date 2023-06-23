@@ -11,8 +11,13 @@ export default function GameCard(props) {
       <View style={{marginLeft: 12, alignSelf: 'center'}}>
         <Text style={styles.title}>{props.title}</Text>
         <Text style={styles.text}>{props.publisher}</Text>
-        <View style={styles.genreBox}>
-          <Text style={styles.genreText}>{props.genre}</Text>
+        <View style={{flexDirection: 'row'}}>
+          <View style={styles.genreBox}>
+            <Text style={styles.genreText}>{props.genre}</Text>
+          </View>
+          <View style={styles.platformBox}>
+            <Text style={styles.genreText}>{props.platform}</Text>
+          </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -44,6 +49,14 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginTop: 5,
   },
+  platformBox: {
+    backgroundColor: 'rgb(32,186,106)',
+    borderRadius: 12,
+    padding: 5,
+    alignSelf: 'flex-start',
+    marginTop: 5,
+    marginLeft: 5,
+  },
   genreText: {
     fontWeight: '500',
     fontSize: 12,
@@ -52,8 +65,10 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '600',
     fontSize: 15,
+    width: 250,
   },
   text: {
+    width: 240,
     color: 'darkgray',
   },
 });

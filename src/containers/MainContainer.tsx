@@ -1,35 +1,37 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
 import Header from '../components/Header';
 import GameCard from '../components/GameCard';
-import {fetchGames, Game} from '../service/Api';
+import {fetchGames} from '../service/Api';
+import {GameContext} from '../context/GameContext';
 
 export default function MainContainer() {
-  const [games, setGames] = useState<Game[]>([]);
+  const {addGames, showedGames} = useContext(GameContext);
 
   useEffect(() => {
     const fetchData = async () => {
       const list = await fetchGames();
-      setGames([{key: 'left-spacer'}, ...list, {key: 'right-spacer'}]);
-      console.log(games);
+      addGames([{key: 'left-spacer'}, ...list, {key: 'right-spacer'}]);
     };
 
-    if (games.length === 0) {
+    if (showedGames.length === 0) {
       fetchData();
     }
-  }, [games]);
+  }, [showedGames]);
 
   return (
     <View style={styles.container}>
       <Header />
       <FlatList
-        data={games}
+        data={showedGames}
         renderItem={({item}) => (
           <GameCard
             thumbnail={item.thumbnail}
             title={item.title}
             publisher={item.publisher}
             genre={item.genre}
+            platform={item.platform}
+            date={item.release_date}
             bounces={false}
           />
         )}

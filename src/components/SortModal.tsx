@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   Text,
   StyleSheet,
@@ -8,9 +8,11 @@ import {
   View,
 } from 'react-native';
 import {SvgUri} from 'react-native-svg';
+import {GameContext} from '../context/GameContext';
 
 const SortModal: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const {getAlphabeticallyOrdered, getByDateOrdered} = useContext(GameContext);
 
   const openModal = () => {
     setModalVisible(true);
@@ -37,6 +39,15 @@ const SortModal: React.FC = () => {
           <View style={styles.overlay}>
             <View style={styles.modalContainer}>
               <View style={styles.modalContent}>
+                <TouchableOpacity
+                  style={styles.modalButton}
+                  onPress={() => {
+                    getByDateOrdered();
+                    closeModal();
+                  }}>
+                  <Text style={styles.modalText}>Sort by Release Date</Text>
+                </TouchableOpacity>
+                <View style={styles.modalLine} />
                 <TouchableOpacity style={styles.modalButton}>
                   <Text style={styles.modalText}>Sort by Popularity</Text>
                 </TouchableOpacity>
@@ -45,8 +56,12 @@ const SortModal: React.FC = () => {
                   <Text style={styles.modalText}>Sort by Relevance</Text>
                 </TouchableOpacity>
                 <View style={styles.modalLine} />
-
-                <TouchableOpacity style={styles.modalButton}>
+                <TouchableOpacity
+                  style={styles.modalButton}
+                  onPress={() => {
+                    getAlphabeticallyOrdered();
+                    closeModal();
+                  }}>
                   <Text style={styles.modalText}>
                     Sort by Alphabetical Order
                   </Text>
