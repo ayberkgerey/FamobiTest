@@ -1,12 +1,13 @@
 import React, {useEffect, useContext} from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
-import Header from '../components/Header';
+import MainHeader from '../components/MainHeader';
 import GameCard from '../components/GameCard';
-import {fetchGames} from '../service/Api';
+import {fetchGames, fetchRelorPop} from '../service/Api';
 import {GameContext} from '../context/GameContext';
 
 export default function MainContainer() {
-  const {addGames, showedGames} = useContext(GameContext);
+  const {addGames, showedGames, setRelevanceSorted, setPopularitySorted} =
+    useContext(GameContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,18 +15,37 @@ export default function MainContainer() {
       addGames([{key: 'left-spacer'}, ...list, {key: 'right-spacer'}]);
     };
 
+    const fetchRelAndPop = async () => {
+      const relevance = await fetchRelorPop('relevance');
+      setRelevanceSorted([
+        {key: 'left-spacer'},
+        ...relevance,
+        {key: 'right-spacer'},
+      ]);
+
+      const popularity = await fetchRelorPop('popularity');
+      console.log(JSON.stringify(popularity));
+      setPopularitySorted([
+        {key: 'left-spacer'},
+        ...popularity,
+        {key: 'right-spacer'},
+      ]);
+    };
+
     if (showedGames.length === 0) {
       fetchData();
+      fetchRelAndPop();
     }
   }, [showedGames]);
 
   return (
     <View style={styles.container}>
-      <Header />
+      <MainHeader />
       <FlatList
         data={showedGames}
         renderItem={({item}) => (
           <GameCard
+            id={item.id}
             thumbnail={item.thumbnail}
             title={item.title}
             publisher={item.publisher}

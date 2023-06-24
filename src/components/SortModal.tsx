@@ -12,7 +12,12 @@ import {GameContext} from '../context/GameContext';
 
 const SortModal: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const {getAlphabeticallyOrdered, getByDateOrdered} = useContext(GameContext);
+  const {
+    getAlphabeticallyOrdered,
+    getByDateOrdered,
+    getRelevanceOrdered,
+    getPopularityOrdered,
+  } = useContext(GameContext);
 
   const openModal = () => {
     setModalVisible(true);
@@ -48,11 +53,21 @@ const SortModal: React.FC = () => {
                   <Text style={styles.modalText}>Sort by Release Date</Text>
                 </TouchableOpacity>
                 <View style={styles.modalLine} />
-                <TouchableOpacity style={styles.modalButton}>
+                <TouchableOpacity
+                  style={styles.modalButton}
+                  onPress={() => {
+                    getPopularityOrdered();
+                    closeModal();
+                  }}>
                   <Text style={styles.modalText}>Sort by Popularity</Text>
                 </TouchableOpacity>
                 <View style={styles.modalLine} />
-                <TouchableOpacity style={styles.modalButton}>
+                <TouchableOpacity
+                  style={styles.modalButton}
+                  onPress={() => {
+                    getRelevanceOrdered();
+                    closeModal();
+                  }}>
                   <Text style={styles.modalText}>Sort by Relevance</Text>
                 </TouchableOpacity>
                 <View style={styles.modalLine} />

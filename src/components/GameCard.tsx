@@ -1,12 +1,21 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet, View, Image} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 export default function GameCard(props) {
+  const navigation = useNavigation();
+
   if (!props.title || !props.thumbnail) {
     return null;
   }
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => {
+        navigation.navigate('Detail', {
+          item: props.id,
+        });
+      }}>
       <Image source={{uri: props.thumbnail}} style={styles.imageBox} />
       <View style={{marginLeft: 12, alignSelf: 'center'}}>
         <Text style={styles.title}>{props.title}</Text>

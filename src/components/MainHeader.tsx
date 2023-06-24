@@ -1,9 +1,9 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {SafeAreaView, Text, StyleSheet} from 'react-native';
 import SortModal from './SortModal';
 import FilterModal from './FilterModal';
 
-export default function Header() {
+export default function MainHeader() {
   return (
     <SafeAreaView style={styles.container}>
       <SortModal />

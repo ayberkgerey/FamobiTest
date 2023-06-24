@@ -58,6 +58,14 @@ const FilterModal: React.FC = () => {
                   }}>
                   <Text style={styles.modalText}>Web Browser</Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.modalButton}
+                  onPress={() => {
+                    getByPlatform('PC (Windows), Web Browser');
+                    closeModal();
+                  }}>
+                  <Text style={styles.modalText}>All</Text>
+                </TouchableOpacity>
                 <Text style={styles.modalTitle}>Category Filter</Text>
                 <View style={styles.modalLine} />
                 <TouchableOpacity

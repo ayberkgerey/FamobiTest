@@ -5,6 +5,8 @@ export const GameContext = createContext({});
 const GameProvider = ({children}) => {
   const [pulledGames, setPulledGames] = useState([]);
   const [showedGames, setShowedGames] = useState([]);
+  const [relevanceSorted, setRelevanceSorted] = useState([]);
+  const [popularitySorted, setPopularitySorted] = useState([]);
 
   const addGames = list => {
     setPulledGames(list);
@@ -20,6 +22,14 @@ const GameProvider = ({children}) => {
     const sorted = sortGamesByReleaseDate(pulledGames);
     console.log(sorted);
     setShowedGames(sorted);
+  };
+
+  const getRelevanceOrdered = () => {
+    setShowedGames(relevanceSorted);
+  };
+
+  const getPopularityOrdered = () => {
+    setShowedGames(popularitySorted);
   };
 
   const getByPlatform = platform => {
@@ -64,10 +74,14 @@ const GameProvider = ({children}) => {
       value={{
         showedGames,
         addGames,
+        setRelevanceSorted,
+        setPopularitySorted,
         getAlphabeticallyOrdered,
         getByDateOrdered,
         getByPlatform,
         getByCategory,
+        getRelevanceOrdered,
+        getPopularityOrdered,
       }}>
       {children}
     </GameContext.Provider>

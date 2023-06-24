@@ -1,11 +1,14 @@
 import React from 'react';
-import MainContainer from './src/containers/MainContainer';
 import GameProvider from './src/context/GameContext';
+import {NavigationContainer} from '@react-navigation/native';
+import StackNavigation from './src/navigations/StackNavigation';
 
 export default function App() {
   return (
     <GameProvider>
-      <MainContainer />
+      <NavigationContainer>
+        <StackNavigation />
+      </NavigationContainer>
     </GameProvider>
   );
 }
